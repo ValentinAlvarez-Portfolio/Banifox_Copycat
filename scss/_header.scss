@@ -1,0 +1,232 @@
+@mixin flexbox ($posicionamiento:col) {
+    display: flex;
+}
+
+@mixin headers {
+    #headerUno {
+        background-color: map-get($paletaDeColores, "negro-suave");
+
+        nav {
+
+            div {
+
+                div {
+
+                    .cardHeader {
+                        background-color: transparent !important;
+                    }
+
+
+                    ul {
+                        li {
+
+                            i {
+                                color: map-get($paletaDeColores, "blanco");
+                            }
+
+                            .nav-link {
+                                color: map-get($paletaDeColores, "blanco") !important;
+                                font-size: 1rem*0.85;
+                                margin-top: 1rem*0.5;
+                            }
+
+                            .dropdown-item {
+                                color: map-get($paletaDeColores, "azul") !important;
+                                font-size: 1rem*0.85;
+                                border-bottom: 1rem*0.05 solid map-get($paletaDeColores, "gris") !important;
+                            }
+
+                            .nombreCuenta {
+                                color: map-get($paletaDeColores, "azul") !important;
+                                font-size: 1rem*0.9;
+                            }
+                        }
+
+                        .iconoUsuario {
+                            margin-top: 1rem*0.85;
+                        }
+                    }
+
+                    .dropdown-menu {
+                        padding: 1rem*0.1;
+                    }
+
+                }
+
+
+
+                .wpp {
+
+                    div {
+
+                        div {
+
+                            div {
+
+                                .whatsapp {
+                                    color: map-get($paletaDeColores, "blanco") !important;
+                                }
+
+                                div {
+                                    .card-text {
+                                        color: map-get($paletaDeColores, "blanco") !important;
+                                        margin-bottom: 1rem*0 !important;
+                                    }
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+                .buscar {
+
+                    form {
+
+                        input {
+                            border-radius: 0% !important;
+                        }
+
+                        input:focus {
+                            outline: none;
+                            box-shadow: none;
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+    #headerDos {
+        background-color: map-get($paletaDeColores, "negro");
+
+        div {
+
+            div {
+
+                .categorias {
+
+                    background-color: map-get($paletaDeColores, "azul");
+                    padding-right: 0% !important;
+                    padding-top: 1rem*0.25 !important;
+                    padding-bottom: 1rem*0.25 !important;
+                    font-size: 1rem*0.95 !important;
+
+
+
+                    .dropdown-toggle {
+                        color: #ffffff;
+                    }
+                }
+
+                .navbarSecciones {
+                    padding: 0% !important;
+
+                    nav {
+
+                        @include flexbox;
+                        justify-content: center;
+
+                        ul {
+
+
+
+                            .itemsSecciones {
+                                margin-right: 1.8rem !important;
+                            }
+
+                            .nav-item {
+
+                                .nav-link {
+                                    color: map-get($paletaDeColores, "blanco") !important;
+                                    font-size: 1rem*0.95;
+                                    padding-top: 4px !important;
+                                    padding-bottom: 4px !important;
+
+                                    .links {
+                                        text-decoration: none !important;
+                                        color: map-get($paletaDeColores, "blanco") !important;
+                                    }
+
+                                    .links:hover {
+                                        color: map-get($paletaDeColores, "azul") !important;
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+
+                #carritoHeader {
+                    @include flexbox;
+                    justify-content: end;
+
+                    a {
+                        color: map-get($paletaDeColores, "blanco");
+                        opacity: 90%;
+                        text-decoration: none !important;
+                    }
+                }
+
+            }
+
+        }
+
+    }
+
+    #carousel {
+        padding: 0%;
+    }
+}
+
+
+
+@mixin headersDesktopSm {
+    #headerUno {
+        nav {
+            div {
+                .wpp {
+                    display: none !important;
+                }
+            }
+        }
+    }
+
+    #headerDos {
+        div {
+            div {
+                .navbarSecciones {
+                    display: none !important;
+                }
+            }
+        }
+    }
+}
+
+@mixin headersTablet {
+    #headerUno {
+        nav {
+            div {
+                .logo {
+                    div {
+                        @include flexbox;
+                        justify-content: center;
+                    }
+                }
+
+                .wpp {
+                    display: none !important;
+                }
+            }
+        }
+    }
+}

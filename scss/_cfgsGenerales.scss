@@ -1,0 +1,30 @@
+@mixin configuracionesGenerales {
+
+    p {
+        font-family: map-get($fuentes, "regular");
+    }
+
+    a {
+        font-family: map-get($fuentes, "regular");
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .visible {
+        display: block;
+    }
+
+    .tituloAlerta {
+        font-family: map-get($fuentes, "regular") !important;
+        font-size: 1.1rem !important;
+        color: map-get($paletaDeColores, "negro-suave") !important;
+    }
+
+    .aclaraciones {
+        font-size: 1rem*0.8;
+        color: map-get($paletaDeColores, "gris") !important;
+    }
+
+}

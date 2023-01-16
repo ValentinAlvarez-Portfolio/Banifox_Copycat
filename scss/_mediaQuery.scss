@@ -1,0 +1,42 @@
+@mixin mediaQuery ($vista) {
+
+    @if $vista==desktopMd {
+        @media only screen and (max-width:1199.98px) {}
+    }
+
+    @else if $vista==desktopSm {
+        @media only screen and (max-width:991.98px) {
+
+            @include headersDesktopSm;
+
+        }
+    }
+
+    @else if $vista==tablet {
+        @media only screen and (max-width:767.98px) {
+
+            @include headersTablet;
+
+        }
+    }
+
+    @else if $vista==mobile {
+        @media only screen and (max-width:575.98px) {}
+    }
+
+    @else {
+
+        @include configuracionesGenerales;
+
+        @include headers;
+
+        @include main;
+
+        @include carrito;
+
+        @include footer;
+
+
+    }
+
+}

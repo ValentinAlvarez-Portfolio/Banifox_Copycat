@@ -1,0 +1,108 @@
+@mixin carrito {
+
+    #mainCarrito {
+        .navCarrito {
+            div {
+                ul {
+                    li {
+                        .numeroNavCarrito {
+                            color: map-get($paletaDeColores, "azul") !important;
+                            font-size: 1rem*3;
+                            padding-right: 0%;
+                        }
+                    }
+
+                    .textoNavCarrito {
+                        margin-top: 1rem*1.4;
+                        padding-left: 0%;
+
+                        .nav-link {
+                            color: map-get($paletaDeColores, "gris");
+                            font-size: 1rem*1.1;
+                            padding-left: 1rem*0.8;
+                            margin-right: 1rem*1.2;
+                        }
+
+                    }
+
+                    .opacidadNavCarrito {
+                        .nav-link {
+                            opacity: 40%;
+                        }
+
+                        .nav-link:focus {
+                            opacity: 100%;
+                        }
+                    }
+
+                }
+            }
+        }
+
+        #carrito {
+
+            p {
+                font-size: 1rem*0.93;
+            }
+
+            .fa-trash,
+            .fa-pen,
+            #tituloPoductoCarrito {
+                color: map-get($paletaDeColores, "azul") !important;
+            }
+
+            #tituloPoductoCarrito {
+                font-size: 1rem*1.2;
+            }
+
+            #codigoProductoCarrito {
+                font-family: map-get($fuentes, "bold");
+            }
+
+            #precioProductoCarrito,
+            #precioTotal {
+                color: map-get($paletaDeColores, "rojo") !important;
+            }
+
+            #resumenPedido {
+                background-color: map-get($paletaDeColores, "azul") !important;
+                color: map-get($paletaDeColores, "blanco-suave") !important;
+                font-family: map-get($fuentes, "regular");
+                font-size: 1rem*1.9 !important;
+            }
+
+            #btnPagar,
+            #btnCrearCuenta {
+                background-color: map-get($paletaDeColores, "azul") !important;
+
+                a {
+                    color: map-get($paletaDeColores, "blanco") !important;
+                    font-family: map-get($fuentes, "regular");
+                    font-size: 1rem*0.95;
+                }
+
+            }
+
+            #btnPagar:hover,
+            #btnCrearCuenta:hover {
+                transition: ease-in-out 0.3s;
+                background-color: map-get($paletaDeColores, "negro-suave") !important;
+            }
+
+            #btnIngresarCarrito {
+                background-color: map-get($paletaDeColores, "blanco");
+
+                a {
+                    font-family: map-get($fuentes, "regular");
+                    font-size: 1rem*0.95;
+                }
+            }
+
+            #btnIngresarCarrito:hover {
+                transition: ease-in-out 0.3s;
+                background-color: rgb(228, 228, 228);
+            }
+
+        }
+    }
+}

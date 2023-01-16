@@ -1,0 +1,149 @@
+@mixin main {
+    main {
+        div {
+            margin-top: 1rem*0.75;
+            margin-bottom: 1rem*0.75;
+
+            div {
+                h2 {
+                    color: map-get($paletaDeColores, "azul");
+                }
+            }
+        }
+    }
+
+    #mainIndex {
+
+        #creadorProductos {
+            div {
+                #completarTodo {
+                    color: map-get($paletaDeColores, "rojo");
+                }
+            }
+
+            div {
+
+                input,
+                select {
+                    font-size: 1rem*0.8;
+                    padding: 1rem*0.85 1rem;
+                }
+
+                input:focus,
+                select:focus {
+                    border-color: map-get($paletaDeColores, "azul");
+                    border-width: 1rem*0.14;
+                    border-radius: 1rem*0.2 !important;
+                    box-shadow: none !important;
+                }
+
+                .btn {
+                    padding: 1rem 1rem*1.5;
+                    font-size: 1rem;
+                }
+            }
+        }
+
+        #titulosProductosNuevos {
+            div {
+                h4 {
+                    color: map-get($paletaDeColores, "azul");
+                }
+            }
+        }
+
+        #productosNuevos {
+            div {
+                div {
+                    .card {
+
+                        div {
+                            p {
+                                font-size: 1rem*0.80;
+                            }
+
+                            h6 {
+                                font-size: 1rem*1.05 !important;
+                                color: map-get($paletaDeColores, "rojo");
+                            }
+
+
+                        }
+
+                        .card-footer {
+                            background-color: transparent;
+
+                            .btn {
+                                background-color: map-get($paletaDeColores, "azul");
+                                color: map-get($paletaDeColores, "blanco");
+                                font-size: 1rem*0.95;
+                                padding: 1rem*0.5 1rem*1.5;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    #mainLogin {
+        div {
+            div {
+                h2 {
+                    color: map-get($paletaDeColores, "negro");
+                }
+
+                #login {
+                    div {
+                        div {
+                            div {
+                                form {
+                                    div {
+
+                                        input,
+                                        select {
+                                            font-size: 1rem*0.8;
+                                            padding: 1rem*0.85 1rem;
+                                        }
+
+                                        input:focus,
+                                        select:focus {
+                                            border-color: map-get($paletaDeColores, "azul");
+                                            border-width: 1rem*0.14;
+                                            border-radius: 1rem*0.2 !important;
+                                            box-shadow: none !important;
+                                        }
+
+                                        .btn {
+                                            padding: 1rem 1rem*1.5;
+                                            font-size: 1rem;
+                                        }
+                                    }
+
+                                    p {
+                                        font-size: 1rem*0.8;
+                                        color: red;
+                                    }
+
+
+
+                                    label {
+                                        font-size: 1rem*1.05;
+                                        color: map-get($paletaDeColores, "azul");
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .animate__animated .animate__flipInX {
+                        animation-duration: 0.5s;
+                    }
+
+                }
+            }
+        }
+    }
+}

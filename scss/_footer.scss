@@ -1,0 +1,43 @@
+@mixin footer {
+    #footer {
+        background-color: map-get($paletaDeColores, "negro-suave") !important;
+        padding-top: 1rem*1.65 !important;
+        padding-bottom: 1rem*1.65 !important;
+
+        div {
+            div {
+                .cardFooter {
+                    div {
+                        .card-text {
+                            color: map-get($paletaDeColores, "gris");
+                            font-size: 1rem*0.85;
+                            margin-bottom: 0%;
+                        }
+                    }
+                }
+            }
+        }
+
+        .navegadorFooter {
+
+            div {
+
+                nav {
+
+                    .breadcrumb {
+
+                        .breadcrumb-item {
+
+                            a {
+                                color: map-get($paletaDeColores, "blanco") !important;
+                                font-size: 1rem*0.85 !important;
+                                text-decoration: none;
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
