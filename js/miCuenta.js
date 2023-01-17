@@ -1,14 +1,6 @@
 const formularioDatosBasicos = document.querySelector('#formularioDatosBasicos');
 const formularioDireccion = document.querySelector('#formularioDireccion');
 const formularioDatosAcceso = document.querySelector('#formularioDatosAcceso');
-
-usuarioActivo = {
-        emailUsuario: JSON.parse(sessionStorage.getItem('Usuario Activo'))[0].emailUsuario,
-        passwordUsuario: JSON.parse(sessionStorage.getItem('Usuario Activo'))[0].passwordUsuario
-};
-    
-usuarioAModificar = JSON.parse(localStorage.getItem(usuarioActivo.emailUsuario));
-
 const campos = {
     nombre: '#nombreMiCuenta',
     apellido: '#apellidoMiCuenta',
@@ -27,6 +19,14 @@ const campos = {
     passwordNuevaRepetida: '#passwordNuevaRepetidaMiCuenta'
 };
 
+
+usuarioActivo = {
+        emailUsuario: JSON.parse(sessionStorage.getItem('Usuario Activo'))[0].emailUsuario,
+        passwordUsuario: JSON.parse(sessionStorage.getItem('Usuario Activo'))[0].passwordUsuario
+};
+    
+usuarioAModificar = JSON.parse(localStorage.getItem(usuarioActivo.emailUsuario));
+
 for (const propiedad in usuarioAModificar) {
     if (usuarioAModificar[propiedad]) {
         (propiedad !== 'emailUsuario' && propiedad !== 'passwordUsuario')?
@@ -38,12 +38,12 @@ for (const propiedad in usuarioAModificar) {
 
 formularioDatosBasicos.addEventListener('submit', (e) => {
     e.preventDefault();
-    modificarDatosBasicos();
+    validarDatosBasicos();
 });
 
 formularioDireccion.addEventListener('submit', (e) => {
     e.preventDefault();
-    modificarDireccion();
+    validarDireccion();
 });
 
 formularioDatosAcceso.addEventListener('submit', (e) => {
@@ -53,33 +53,119 @@ formularioDatosAcceso.addEventListener('submit', (e) => {
         mostrarError(errorPasswordActualMiCuenta);
 });
 
-
-function modificarDatosBasicos() {
-
-    const datos = new FormData(formularioDatosBasicos);
-    const propiedades = ['nombre', 'apellido', 'razonSocial', 'cedula', 'celular', 'telefono'];
-
-    for (let i = 0; i < propiedades.length; i++) {
-        usuarioAModificar[propiedades[i]] = datos.get(propiedades[i]);
+function validarCampo(nombreCampo, valorCampo) {
+    if (valorCampo === "") {
+        return false;
+    } else {
+        switch (nombreCampo) {
+            case 'cedula':
+                if (valorCampo.length === 8) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case 'celular':
+                if (valorCampo.length === 9) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case 'telefono':
+                if (valorCampo.length === 8) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case 'numeroPuerta':
+                if (valorCampo.length >= 4) {
+                    return true;
+                } else {
+                    return false;
+                }
+            case 'numeroApartamento':
+                if (valorCampo.length >= 4) {
+                    return true;
+                }
+            case 'codigoPostal':
+                if (valorCampo.length >= 4) {
+                    return true;
+                }
+            case 'passwordNueva':
+                if (valorCampo.length >= 8) {
+                    return true;
+                }
+            case 'passwordNuevaRepetida':
+                if (valorCampo.length >= 8) {
+                    return true;
+                } else {
+                    return false;
+                }
+            default:
+                return true;
+        }
     }
-    localStorage.setItem(usuarioActivo.emailUsuario, JSON.stringify(usuarioAModificar));
-
 }
 
-function modificarDireccion() {
+function validarDatosBasicos() {
+    const datos = new FormData(formularioDatosBasicos);
+    const propiedadesDatosBasicos = ['nombre', 'apellido', 'razonSocial', 'cedula', 'celular', 'telefono'];
+    let formularioValido = true;
+
+    propiedadesDatosBasicos.forEach(propiedad => {
+        if (!validarCampo(propiedad, datos.get(propiedad)) && propiedad !== 'razonSocial' && propiedad !== 'telefono') {
+            formularioValido = false;
+            document.querySelector(`#${propiedad}Requerido`).classList.remove('hidden');
+        } else {
+            document.querySelector(`#${propiedad}Requerido`).classList.add('hidden');
+        }
+    });
+
+    if (formularioValido) {
+        for (let i = 0; i < propiedadesDatosBasicos.length; i++) {
+            usuarioAModificar[propiedadesDatosBasicos[i]] = datos.get(propiedadesDatosBasicos[i]);
+        }
+        localStorage.setItem(usuarioActivo.emailUsuario, JSON.stringify(usuarioAModificar));
+        confirmacionDatosBasicos.classList.remove('hidden');
+        setTimeout(() => {
+            confirmacionDatosBasicos.classList.add('hidden');
+            location.reload();
+        }, 2000);
+    } else {
+        return;
+    }
+}    
+
+function validarDireccion() {
 
     const datos = new FormData(formularioDireccion);
-    const propiedades = ['departamento', 'localidad', 'calle', 'numeroPuerta', 'numeroApartamento', 'codigoPostal'];
+    const propiedadesDireccion = ['departamento', 'localidad', 'calle', 'numeroPuerta', 'numeroApartamento', 'codigoPostal'];
+    let formularioValido = true;
 
-    for (let i = 0; i < propiedades.length; i++) {
-        usuarioAModificar[propiedades[i]] = datos.get(propiedades[i]);
+    propiedadesDireccion.forEach(propiedad => {
+        if (!validarCampo(propiedad, datos.get(propiedad)) && propiedad !== 'numeroApartamento' && propiedad !== 'codigoPostal') {
+            formularioValido = false;
+            document.querySelector(`#${propiedad}Requerido`).classList.remove('hidden');
+        } else {
+            document.querySelector(`#${propiedad}Requerido`).classList.add('hidden');
+        }
+    });
+
+    if (formularioValido) {
+        for (let i = 0; i < propiedadesDireccion.length; i++) {
+            usuarioAModificar[propiedadesDireccion[i]] = datos.get(propiedadesDireccion[i]);
+        }
+        localStorage.setItem(usuarioActivo.emailUsuario, JSON.stringify(usuarioAModificar));
+        confirmacionDireccion.classList.remove('hidden');
+        setTimeout(() => {
+            confirmacionDireccion.classList.add('hidden');
+            location.reload();
+        }, 2000);
+    } else {
+        return;
     }
-    localStorage.setItem(usuarioActivo.emailUsuario, JSON.stringify(usuarioAModificar));
-
 }
 
 function modificarPassword() {
-    const passwordActual = document.querySelector('#passwordActualMiCuenta').value;
     const passwordNueva = document.querySelector('#passwordNuevaMiCuenta').value;
     const passwordRepetida = document.querySelector('#passwordRepetidaMiCuenta').value;
     const errorPasswordActual = errorPasswordActualMiCuenta;
@@ -94,7 +180,7 @@ function modificarPassword() {
         (passwordNueva !== passwordRepetida) ?
             [ocultarError(errorPasswordNueva),
             mostrarError(errorPasswordRepetida)] :
-            [ocultarError(errorPasswordRepetida),
+            [ocultarError(errorPasswordRepetida), ocultarError(errorPasswordRepetida),
             usuarioAModificar.passwordUsuario = passwordNueva,
             localStorage.setItem(usuarioActivo.emailUsuario, JSON.stringify(usuarioAModificar)),
             sessionStorage.setItem('Usuario Activo', JSON.stringify([usuarioAModificar])),

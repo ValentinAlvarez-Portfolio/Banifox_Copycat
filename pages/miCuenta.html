@@ -302,11 +302,13 @@
                                             <input type="text" class="form-control form-control-lg rounded-0"
                                                 id="nombreMiCuenta" placeholder="Nombre (*)" maxlength="60"
                                                 name="nombre">
+                                            <p class="hidden" id="nombreRequerido">Por favor, ingrese su nombre.</p>
                                         </div>
                                         <div class="col-6">
                                             <input type="text" class="form-control form-control-lg rounded-0"
                                                 id="apellidoMiCuenta" placeholder="Apellido (*)" maxlength="60"
                                                 name="apellido">
+                                            <p class="hidden" id="apellidoRequerido">Por favor, ingrese su apellido.</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -314,30 +316,40 @@
                                             <input type="text" class="form-control form-control-lg rounded-0"
                                                 id="razonSocialMiCuenta" placeholder="Razón Social" maxlength="60"
                                                 name="razonSocial">
+                                            <p class="hidden" id="razonSocialRequerido">Por favor, ingrese su razón
+                                                social.</p>
                                         </div>
                                         <div class="col-6">
-                                            <input type="text" class="form-control form-control-lg rounded-0"
+                                            <input type="number" class="form-control form-control-lg rounded-0"
                                                 id="ciMiCuenta" placeholder="C.I. (*)" maxlength="60" name="cedula">
+                                            <p class="hidden" id="cedulaRequerido">Por favor, ingrese su cedula.</p>
                                             <p class="aclaraciones">Ingrese el número sin puntos ni guiones</p>
                                         </div>
                                     </div>
                                     <div class="mb-4 row">
                                         <div class="col-6">
-                                            <input type="text" class="form-control form-control-lg rounded-0"
+                                            <input type="number" class="form-control form-control-lg rounded-0"
                                                 id="celularMiCuenta" placeholder="Celular (*)" maxlength="60"
                                                 name="celular">
+                                            <p class="hidden" id="celularRequerido">Por favor, ingrese su celular.</p>
                                         </div>
                                         <div class="col-6">
-                                            <input type="text" class="form-control form-control-lg rounded-0"
-                                                id="telefonoMiCuenta" placeholder="Teléfono (*)" maxlength="60"
+                                            <input type="number" class="form-control form-control-lg rounded-0"
+                                                id="telefonoMiCuenta" placeholder="Teléfono" maxlength="60"
                                                 name="telefono">
+                                            <p class="hidden" id="telefonoRequerido">Por favor, ingrese su razón
+                                                Teléfono.</p>
                                         </div>
                                     </div>
                                     <div class="row d-flex justify-content-center">
                                         <div class="col-5 ">
-                                            <button type="submit" class="btn btn-dark rounded-0 "><a
+                                            <button type="submit" class="btn btn-dark rounded-0 "
+                                                id="editarDatosBasicos"><a
                                                     class="text-decoration-none text-reset">EDITAR </a></button>
                                             <p class="aclaraciones mt-3">Los campos con (*) son obligatorios.</p>
+                                            <label for="editarDatosBasicos" class="hidden"
+                                                id="confirmacionDatosBasicos">Los datos se han guardado
+                                                correctamente.</label>
                                         </div>
                                     </div>
                                 </form>
@@ -355,10 +367,10 @@
                                     id="formularioDireccion">
                                     <div class="mb-3 row">
                                         <div class="col-6">
-                                            <select class="form-select form-select-lg rounded-0 mb-3"
+                                            <select class="form-select form-select-lg rounded-0 "
                                                 aria-label=".form-select-lg" id="departamentoMiCuenta"
                                                 name="departamento">
-                                                <option selected>Departamento (*)</option>
+                                                <option selected value="">Departamento (*)</option>
                                                 <option value="Artigas">Artigas</option>
                                                 <option value="Canelones">Canelones</option>
                                                 <option value="Cerro Largo">Cerro Largo</option>
@@ -379,22 +391,31 @@
                                                 <option value="Tacuarembó">Tacuarembó</option>
                                                 <option value="Treinta y Tres">Treinta y Tres</option>
                                             </select>
+                                            <p class="hidden" id="departamentoRequerido">Por favor, seleccione su
+                                                departamento.</p>
                                         </div>
                                         <div class="col-6">
                                             <input type="text" class="form-control form-control-lg rounded-0"
                                                 id="localidadMiCuenta" placeholder="Localidad (*)" maxlength="60"
                                                 name="localidad">
+                                            <p class="hidden" id="localidadRequerido">Por favor, ingrese su localidad.
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="mb-4 row">
                                         <div class="col-6">
                                             <input type="text" class="form-control form-control-lg rounded-0"
                                                 id="calleMiCuenta" placeholder="Calle (*)" maxlength="60" name="calle">
+                                            <p class="hidden" id="calleRequerido">Por favor, ingrese su calle.
+                                            </p>
                                         </div>
                                         <div class="col-6">
                                             <input type="text" class="form-control form-control-lg rounded-0"
                                                 id="numeroPuertaMiCuenta" placeholder="Número de puerta (*)"
                                                 maxlength="60" name="numeroPuerta">
+                                            <p class="hidden" id="numeroPuertaRequerido">Por favor, ingrese su número de
+                                                puerta.
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="mb-4 row">
@@ -402,18 +423,28 @@
                                             <input type="text" class="form-control form-control-lg rounded-0"
                                                 id="numeroApartamentoMiCuenta" placeholder="Número de apartamento"
                                                 maxlength="60" name="numeroApartamento">
+                                            <p class="hidden" id="numeroApartamentoRequerido">Por favor, ingrese su
+                                                número de apartamento.
+                                            </p>
                                         </div>
                                         <div class="col-6 mt-1">
                                             <input type="text" class="form-control form-control-lg rounded-0"
                                                 id="codigoPostalMiCuenta" placeholder="Código postal" maxlength="60"
                                                 name="codigoPostal">
+                                            <p class="hidden" id="codigoPostalRequerido">Por favor, ingrese su código
+                                                postal.
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="row d-flex justify-content-center">
                                         <div class="col-5 ">
-                                            <button type="submit" class="btn btn-dark rounded-0 "><a
-                                                    class="text-decoration-none text-reset">EDITAR </a></button>
+                                            <button type="submit" class="btn btn-dark rounded-0 "
+                                                id="editarDireccion"><a class="text-decoration-none text-reset">EDITAR
+                                                </a></button>
                                             <p class="aclaraciones mt-3">Los campos con (*) son obligatorios.</p>
+                                            <label for="editarDireccion" class="hidden" id="confirmacionDireccion">Los
+                                                datos se han guardado
+                                                correctamente.</label>
                                         </div>
                                     </div>
                                 </form>
