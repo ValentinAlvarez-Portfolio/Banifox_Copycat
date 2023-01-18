@@ -140,34 +140,52 @@ main div {
     font-size: 0.95rem;
     padding: 0.5rem 1.5rem; }
 
-#mainLogin div div h2 {
+#mainIngreso div div h2,
+#mainRegistro div div h2,
+#mainMiCuenta div div h2 {
   color: #000000; }
 
-#mainLogin div div #login div div div form div input,
-#mainLogin div div #login div div div form div select {
+#mainIngreso div div #login div div div form div input,
+#mainIngreso div div #login div div div form div select,
+#mainRegistro div div #login div div div form div input,
+#mainRegistro div div #login div div div form div select,
+#mainMiCuenta div div #login div div div form div input,
+#mainMiCuenta div div #login div div div form div select {
   font-size: 0.8rem;
   padding: 0.85rem 1rem; }
 
-#mainLogin div div #login div div div form div input:focus,
-#mainLogin div div #login div div div form div select:focus {
+#mainIngreso div div #login div div div form div input:focus,
+#mainIngreso div div #login div div div form div select:focus,
+#mainRegistro div div #login div div div form div input:focus,
+#mainRegistro div div #login div div div form div select:focus,
+#mainMiCuenta div div #login div div div form div input:focus,
+#mainMiCuenta div div #login div div div form div select:focus {
   border-color: #0074bd;
   border-width: 0.14rem;
   border-radius: 0.2rem !important;
   box-shadow: none !important; }
 
-#mainLogin div div #login div div div form div .btn {
+#mainIngreso div div #login div div div form div .btn,
+#mainRegistro div div #login div div div form div .btn,
+#mainMiCuenta div div #login div div div form div .btn {
   padding: 1rem 1.5rem;
   font-size: 1rem; }
 
-#mainLogin div div #login div div div form p {
+#mainIngreso div div #login div div div form p,
+#mainRegistro div div #login div div div form p,
+#mainMiCuenta div div #login div div div form p {
   font-size: 0.8rem;
   color: red; }
 
-#mainLogin div div #login div div div form label {
+#mainIngreso div div #login div div div form label,
+#mainRegistro div div #login div div div form label,
+#mainMiCuenta div div #login div div div form label {
   font-size: 1.05rem;
   color: #0074bd; }
 
-#mainLogin div div #login .animate__animated .animate__flipInX {
+#mainIngreso div div #login .animate__animated .animate__flipInX,
+#mainRegistro div div #login .animate__animated .animate__flipInX,
+#mainMiCuenta div div #login .animate__animated .animate__flipInX {
   animation-duration: 0.5s; }
 
 #mainCarrito .navCarrito div ul li .numeroNavCarrito {

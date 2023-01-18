@@ -53,7 +53,7 @@ function registro() {
             ocultarTodoLogin();
             registroCompleto.classList.remove('hidden');
             setTimeout(() => {
-                window.location.href = "/ingreso.html";
+                window.location.href = "ingreso.html";
             }, 1000);
         })
         .catch(() => {

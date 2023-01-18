@@ -1,3 +1,8 @@
+const mainIndex = document.querySelector("#mainIndex");
+const mainCarrito = document.querySelector("#mainCarrito");
+const mainIngreso = document.querySelector("#mainIngreso");
+const mainRegistro = document.querySelector("#mainRegistro");
+
 function mostrarError(elemento) {
     elemento.classList.remove('hidden');
 }

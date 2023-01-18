@@ -18,9 +18,9 @@ function ingresarORegistro() {
     const bloque = document.querySelectorAll('.bloque');
     const btnAqui = document.querySelectorAll('.btnAqui');
 
-    window.location.pathname === ('/registro.html' ) ?
+    mainRegistro !== null ?
         [ingresar.classList.add('hidden')] :
-        window.location.pathname === ('/ingreso.html' ) ?
+        mainIngreso !== null ?
             [registrar.classList.add('hidden')] :
     null;
 

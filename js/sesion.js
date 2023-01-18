@@ -16,7 +16,7 @@ function sesion() {
             console.log(usuarioAEliminar);
             sessionStorage.removeItem('Usuario Activo');
             localStorage.removeItem(usuarioAEliminar);
-            location.href = '/registro.html';
+            location.href = 'registro.html';
         })
 
     }
@@ -25,7 +25,7 @@ function sesion() {
         const cerrarSesion = document.getElementById('cerrarSesion');
         cerrarSesion.onclick = () => {
             sessionStorage.removeItem('Usuario Activo');
-            location.href = '/index.html';
+            location.href = 'index.html';
             sesion();
         }
     }
@@ -48,7 +48,7 @@ function sesion() {
 
     }
 
-    window.location.pathname === '/index.html' ?
+    mainIndex !== null ?
         admin() :
     null;
     
@@ -57,6 +57,23 @@ function sesion() {
 
     eliminarCuenta !== null ?
         eliminarUsuario() : null;
+    
+    window.addEventListener('DOMContentLoaded', () => {
+    
+    const btnPagar = document.querySelector("#btnPagar");
+    const btnCrearCuenta = document.querySelector("#btnCrearCuenta");
+    const btnIngresarCarrito = document.querySelector("#btnIngresarCarrito");
+    mainCarrito !== null ?
+        sessionStorage.getItem('Usuario Activo') !== null ?
+            [btnPagar.classList.remove('hidden'), btnCrearCuenta.classList.add('hidden'), btnIngresarCarrito.classList.add('hidden')] :
+            [btnPagar.classList.add('hidden'), btnCrearCuenta.classList.remove('hidden'), btnIngresarCarrito.classList.remove('hidden')] :
+        null;
+});
+
+
+
+
+
 
     
 }

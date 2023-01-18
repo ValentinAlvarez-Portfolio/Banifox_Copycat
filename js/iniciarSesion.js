@@ -38,18 +38,20 @@ function ingreso() {
         } else {
             reject();
         }
-    });   
+        });   
+        
     ingresarUsuario
         .then(() => {
             ocultarTodoLogin();
             setTimeout(() => {
                 sesion();
-                window.location.href = '/miCuenta.html';
+                window.location.href = 'miCuenta.html';
             }, 200);
         })
         .catch(() => {
             mostrarError(usuarioNoExiste);
         });
+
     }
 
 }
