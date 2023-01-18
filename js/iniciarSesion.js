@@ -44,7 +44,7 @@ function ingreso() {
             ocultarTodoLogin();
             setTimeout(() => {
                 sesion();
-                window.location.href = /* "/pages/miCuenta.html" */ '/PFAlvarez/pages/miCuenta.html';
+                window.location.href = '/miCuenta.html';
             }, 200);
         })
         .catch(() => {

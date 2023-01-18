@@ -194,7 +194,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const btnPagar = document.querySelector("#btnPagar");
     const btnCrearCuenta = document.querySelector("#btnCrearCuenta");
     const btnIngresarCarrito = document.querySelector("#btnIngresarCarrito");
-    window.location.pathname === /* '/pages/carrito.html' */ '/PFAlvarez/pages/carrito.html' ?
+    window.location.pathname === '/carrito.html' ?
         sessionStorage.getItem('Usuario Activo') !== null ?
             [btnPagar.classList.remove('hidden'), btnCrearCuenta.classList.add('hidden'), btnIngresarCarrito.classList.add('hidden')] :
             [btnPagar.classList.add('hidden'), btnCrearCuenta.classList.remove('hidden'), btnIngresarCarrito.classList.remove('hidden')] :
@@ -203,7 +203,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 sessionStorage.getItem("carrito") ? sumarPrecioCarrito() : null;
 
-window.location.pathname === /* "/pages/carrito.html" */ '/PFAlvarez/pages/carrito.html' ? mostrarCarrito() : null;
+window.location.pathname === '/carrito.html' ? mostrarCarrito() : null;
 
 
 

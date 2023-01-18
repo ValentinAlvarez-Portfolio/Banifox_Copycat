@@ -16,7 +16,7 @@ function sesion() {
             console.log(usuarioAEliminar);
             sessionStorage.removeItem('Usuario Activo');
             localStorage.removeItem(usuarioAEliminar);
-            location.href = /* '/pages/registro.html' */ '/PFAlvarez/pages/registro.html';
+            location.href = '/registro.html';
         })
 
     }
@@ -25,7 +25,7 @@ function sesion() {
         const cerrarSesion = document.getElementById('cerrarSesion');
         cerrarSesion.onclick = () => {
             sessionStorage.removeItem('Usuario Activo');
-            location.href = /* '/index.html' */ '/PFAlvarez/index.html';
+            location.href = '/index.html';
             sesion();
         }
     }
@@ -48,7 +48,7 @@ function sesion() {
 
     }
 
-    window.location.pathname === /* '/index.html' */ '/PFAlvarez/index.html' ?
+    window.location.pathname === '/index.html' ?
         admin() :
     null;
     

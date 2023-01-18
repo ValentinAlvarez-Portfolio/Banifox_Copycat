@@ -127,9 +127,9 @@ function validarDatosBasicos() {
         localStorage.setItem(usuarioActivo.emailUsuario, JSON.stringify(usuarioAModificar));
         confirmacionDatosBasicos.classList.remove('hidden');
         setTimeout(() => {
-            confirmacionDatosBasicos.classList.add('hidden');
+            confirmacionDatosBasicos.classList.remove('hidden');
             location.reload();
-        }, 2000);
+        }, 3000);
     } else {
         return;
     }
