@@ -30,18 +30,32 @@ function crearProducto() {
                 numeroProd: "Producto " + (productos.length + 1),
                 producto: new Producto(nombreProducto, precioProducto , categoriaProducto, marcaProducto, codigoProducto, id),
             },
-            localStorage.setItem(id, JSON.stringify(productoACrear.producto)), location.reload()];
+            localStorage.setItem(id, JSON.stringify(productoACrear.producto)),
+            mostrarElemento(productoCreado),
+            setTimeout(() => {
+                location.reload();
+            }, 2000)];
 }
 
 function eliminarProducto() {
     codigoProductoAEliminar = document.querySelector('#codigoProductoAEliminar').value;
 
     let producto = productos.find(p => p.codigoProd === codigoProductoAEliminar);
-    if (producto.id) {
-        localStorage.removeItem(producto.id);
-        filterdObjects = productos.filter(p => p.codigoProd !== codigoProductoAEliminar);
+    if (producto != undefined) {
+        if (producto.id) {
+            localStorage.removeItem(producto.id);
+            filterdObjects = productos.filter(p => p.codigoProd !== codigoProductoAEliminar);
+            ocultarElemento(errorEliminarProducto);
+            mostrarElemento(productoEliminado);
+            setTimeout(() => {
+            location.reload();
+            }, 2000);
+        } 
+    } else {
+        ocultarElemento(productoEliminado);
+        mostrarElemento(errorEliminarProducto);
     }
-    location.reload();
+    
 
     cargarProductos();
 }
