@@ -5,9 +5,9 @@ function sesion() {
 
     sessionStorage.getItem('Usuario Activo') !== null ?
         
-        [mostrarElemento(bienvenido), registroHeader.classList.add('hidden'), ingresarHeader.classList.add('hidden'), dropCuenta.classList.remove('hidden'), nombreCuenta.innerHTML = JSON.parse(sessionStorage.getItem('Usuario Activo'))[0].emailUsuario] :
+        [mostrarElemento(bienvenido), ocultarElemento(registroHeader), ocultarElemento(ingresarHeader), mostrarElemento(dropCuenta), nombreCuenta.innerHTML = JSON.parse(sessionStorage.getItem('Usuario Activo'))[0].emailUsuario] :
     
-        [bienvenido.classList.add('hidden'), registroHeader.classList.remove('hidden'), ingresarHeader.classList.remove('hidden'), dropCuenta.classList.add('hidden')]; 
+        [ocultarElemento(bienvenido), mostrarElemento(registroHeader), mostrarElemento(ingresarHeader), ocultarElemento(dropCuenta)]; 
     
     function eliminarUsuario() {
         
@@ -42,8 +42,8 @@ function sesion() {
         null;
          
         `${existeAdmin.emailUsuario}` === `${usuarioActivo.emailUsuario}` ?
-            creadorProductos.classList.remove('hidden') :
-            creadorProductos.classList.add('hidden');
+            mostrarElemento(creadorProductos):
+            ocultarElemento(creadorProductos);
         null;
 
     }
@@ -63,10 +63,10 @@ function sesion() {
     const btnPagar = document.querySelector("#btnPagar");
     const btnCrearCuenta = document.querySelector("#btnCrearCuenta");
     const btnIngresarCarrito = document.querySelector("#btnIngresarCarrito");
-    mainCarrito !== null ?
+    mainCarrito !== null && JSON.parse(sessionStorage.getItem("carrito")) !== null && JSON.parse(sessionStorage.getItem("carrito")).length > 0 ?
         sessionStorage.getItem('Usuario Activo') !== null ?
-            [btnPagar.classList.remove('hidden'), btnCrearCuenta.classList.add('hidden'), btnIngresarCarrito.classList.add('hidden')] :
-            [btnPagar.classList.add('hidden'), btnCrearCuenta.classList.remove('hidden'), btnIngresarCarrito.classList.remove('hidden')] :
+            [mostrarElemento(btnPagar), ocultarElemento(btnCrearCuenta), ocultarElemento(btnIngresarCarrito)] :
+            [ocultarElemento(btnPagar), mostrarElemento(btnCrearCuenta), mostrarElemento(btnIngresarCarrito)] :
         null;
 });
 

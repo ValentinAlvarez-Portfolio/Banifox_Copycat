@@ -67,7 +67,7 @@ function sumarPrecioCarrito() {
         precioSubTotal = precioTotalCarrito;
     });
 
-    precioCarritoHeader.innerText = `USD ${precioSubTotal.toFixed(2)}`;
+    precioCarritoHeader.innerText = `USD ${precioTotalCarrito.toFixed(2)}`;
 
     
     function calcularEnvio () {
@@ -92,6 +92,7 @@ function sumarPrecioCarrito() {
 
 function mostrarCarrito() {
 
+    if (JSON.parse(sessionStorage.getItem("carrito")) !== null && JSON.parse(sessionStorage.getItem("carrito")).length > 0) {
         JSON.parse(sessionStorage.getItem("carrito", JSON.stringify(carrito))).forEach(producto => {
             productosEnCarrito.innerHTML += `
                 <div class="card mb-3 p-0 m-0 rounded-0">
@@ -160,58 +161,66 @@ function mostrarCarrito() {
                 </div>
             </div>
             <p class="aclaraciones mt-4 mb-4"> (*) Si usted se encuentra en el interior, el envío tiene un costo de USD 5.</p>
-        `      
+        `
+    } else {
+        null;
+    }
+    
 }
 
 function eliminarProducto(codigoProd) {
 
-    let carrito = JSON.parse(sessionStorage.getItem("carrito"));
-    let producto = carrito.find(p => p.codigoProd === codigoProd);
-    let index = carrito.indexOf(producto);
-    Swal.fire({
-        customClass: {
-            title: 'tituloAlerta',
-        },
-        title: `¿Estás seguro que deseas eliminar este producto del carrito?`,
-        text: `USD ${producto.precioProd} `,
-        position: 'center',
-        imageUrl: `../assets/images/productosNuevos/${producto.codigoProd}.jpg`,
-        imageAlt: 'Imagen producto eliminado del carrito',
-        showCancelButton: true,
-        cancelButtonText: 'Cancelar',
-        confirmButtonColor: '#0074bd',
-        cancelButtonColor: '#d7292b',
-        confirmButtonText: 'Confirmar',
+    if (JSON.parse(sessionStorage.getItem("carrito")) !== null && JSON.parse(sessionStorage.getItem("carrito")).length > 0) {
+        let carrito = JSON.parse(sessionStorage.getItem("carrito"));
+        let producto = carrito.find(p => p.codigoProd === codigoProd);
+        let index = carrito.indexOf(producto);
+        Swal.fire({
+            customClass: {
+                title: 'tituloAlerta',
+            },
+            title: `¿Estás seguro que deseas eliminar este producto del carrito?`,
+            text: `USD ${producto.precioProd} `,
+            position: 'center',
+            imageUrl: `../assets/images/productosNuevos/${producto.codigoProd}.jpg`,
+            imageAlt: 'Imagen producto eliminado del carrito',
+            showCancelButton: true,
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: '#0074bd',
+            cancelButtonColor: '#d7292b',
+            confirmButtonText: 'Confirmar',
         
-    }).then((result) => {
-        if (result.isConfirmed) {
-            let carrito = JSON.parse(sessionStorage.getItem("carrito"));
-            carrito.splice(index, 1);
-            sessionStorage.setItem("carrito", JSON.stringify(carrito));
-            Swal.fire({
-                title: 'Eliminado',
-                text: 'Su producto ha sido eliminado con exito del carrito.',
-                icon: 'success',
-                confirmButtonColor: '#0074bd',
-                confirmButtonText: 'Continuar'
-            }).then((result) => {
-                result.isConfirmed ? location.reload() : location.reload();
-            }).catch((error) => {
-                console.log(error);
-            });
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let carrito = JSON.parse(sessionStorage.getItem("carrito"));
+                carrito.splice(index, 1);
+                sessionStorage.setItem("carrito", JSON.stringify(carrito));
+                Swal.fire({
+                    title: 'Eliminado',
+                    text: 'Su producto ha sido eliminado con exito del carrito.',
+                    icon: 'success',
+                    confirmButtonColor: '#0074bd',
+                    confirmButtonText: 'Continuar'
+                }).then((result) => {
+                    result.isConfirmed ? location.reload() : location.reload();
+                }).catch((error) => {
+                    console.log(error);
+                });
         
-        } else {
-            Swal.fire({
-                title: 'Cancelado',
-                text: 'Su producto no ha sido eliminado del carrito.',
-                icon: 'error',
-                confirmButtonColor: '#0074bd',
-                confirmButtonText: 'Continuar'
-            })
-        }
-    }).catch((error) => {
-        console.log(error);
-    });
+            } else {
+                Swal.fire({
+                    title: 'Cancelado',
+                    text: 'Su producto no ha sido eliminado del carrito.',
+                    icon: 'error',
+                    confirmButtonColor: '#0074bd',
+                    confirmButtonText: 'Continuar'
+                })
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
+    } else {
+        null;
+    }
     
 }
 

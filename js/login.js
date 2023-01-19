@@ -1,14 +1,14 @@
 function ocultarTodoLogin() {
 
-    emailVacioInicio.classList.add('hidden');
-    emailIncorrectoInicio.classList.add('hidden');
-    passwordVaciaInicio.classList.add('hidden');
-    usuarioNoExiste.classList.add('hidden');
-    emailIncorrectoRegistro.classList.add('hidden');
-    passwordVaciaRegistro.classList.add('hidden');
-    passwordIgualesRegistro.classList.add('hidden');
-    usuarioExisteRegistro.classList.add('hidden');
-    registroCompleto.classList.add('hidden');
+    ocultarElemento(emailVacioInicio);
+    ocultarElemento(emailIncorrectoInicio);
+    ocultarElemento(passwordVaciaInicio);
+    ocultarElemento(usuarioNoExiste);
+    ocultarElemento(emailIncorrectoRegistro);
+    ocultarElemento(passwordVaciaRegistro);
+    ocultarElemento(passwordIgualesRegistro);
+    ocultarElemento(usuarioExisteRegistro);
+    ocultarElemento(registroCompleto);
 
 }
 
@@ -19,9 +19,9 @@ function ingresarORegistro() {
     const btnAqui = document.querySelectorAll('.btnAqui');
 
     mainRegistro !== null ?
-        [ingresar.classList.add('hidden')] :
+        [ocultarElemento(ingresar)] :
         mainIngreso !== null ?
-            [registrar.classList.add('hidden')] :
+            [ocultarElemento(registrar)] :
     null;
 
 

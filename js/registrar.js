@@ -11,7 +11,7 @@ function registro() {
     let passwordRegistro = document.querySelector('#passwordRegistro').value;
     let passwordRegistroConfirmar = document.querySelector('#passwordRegistroConfirmar').value;
 
-    registroCompleto.classList.add('hidden');
+    ocultarElemento(registroCompleto);
 
        /^\w+([\.-]?\w+)*@(?:|hotmail|outlook|gmail)\.(?:|com|es)+$/i.test(emailRegistro) === false ?
             
@@ -51,7 +51,7 @@ function registro() {
     guardarUsuario
         .then(() => {
             ocultarTodoLogin();
-            registroCompleto.classList.remove('hidden');
+            mostrarElemento(registroCompleto);
             setTimeout(() => {
                 window.location.href = "ingreso.html";
             }, 1000);

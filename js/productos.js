@@ -22,9 +22,9 @@ function crearProducto() {
     let codigoProducto = document.querySelector('#codigoProducto').value;
 
     nombreProducto, precioProducto, categoriaProducto, marcaProducto, codigoProducto == "" ?
-        [mostrarError(completarTodo)] :
+        [mostrarElemento(completarTodo)] :
 
-        [ocultarError(completarTodo),
+        [ocultarElemento(completarTodo),
             id = Date.now(),
             productoACrear = {
                 numeroProd: "Producto " + (productos.length + 1),
@@ -37,10 +37,11 @@ function eliminarProducto() {
     codigoProductoAEliminar = document.querySelector('#codigoProductoAEliminar').value;
 
     let producto = productos.find(p => p.codigoProd === codigoProductoAEliminar);
-    if(producto){
+    if (producto.id) {
         localStorage.removeItem(producto.id);
         filterdObjects = productos.filter(p => p.codigoProd !== codigoProductoAEliminar);
     }
+    location.reload();
 
     cargarProductos();
 }
@@ -120,13 +121,11 @@ btnCrearProducto.addEventListener("click", (e) => {
 formularioEliminarProductos.addEventListener("submit", (e) => {
     e.preventDefault();
     eliminarProducto();
-    location.reload();
 })
 
 btnEliminarProducto.addEventListener("click", (e) => {
     e.preventDefault();
     eliminarProducto();
-    location.reload();
 })
 
 
