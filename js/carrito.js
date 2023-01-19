@@ -1,5 +1,6 @@
 let carrito = [];
 let precioTotalCarrito = 0;
+let precioEnvio = 0;
 
 const precioCarritoHeader = document.querySelector("#precioCarritoHeader");
 const btnEliminarCarrito = document.querySelector("#btnEliminarCarrito");
@@ -63,9 +64,31 @@ function sumarPrecioCarrito() {
     
     productosCarrito.forEach(producto => {
         precioTotalCarrito += parseInt(producto.precioProd);
+        precioSubTotal = precioTotalCarrito;
     });
-    precioCarritoHeader.innerText = `USD ${precioTotalCarrito.toFixed(2)}`;
+
+    precioCarritoHeader.innerText = `USD ${precioSubTotal.toFixed(2)}`;
+
+    
+    function calcularEnvio () {
+        usuarioActivo = {
+        emailUsuario: JSON.parse(sessionStorage.getItem('Usuario Activo'))[0].emailUsuario,
+        passwordUsuario: JSON.parse(sessionStorage.getItem('Usuario Activo'))[0].passwordUsuario,
+        };
+        usuario = JSON.parse(localStorage.getItem(usuarioActivo.emailUsuario));
+        if (usuario.departamento !== undefined && usuario.departamento !== "Montevideo") {
+            precioEnvio += 5;
+            precioTotalCarrito += precioEnvio;
+        } else {
+            precioEnvio = 0;
+            }
+    }
+
+    JSON.parse(sessionStorage.getItem('Usuario Activo')) !== null ? calcularEnvio() : null;
+    
 }
+
+
 
 function mostrarCarrito() {
 
@@ -111,10 +134,10 @@ function mostrarCarrito() {
                 </div>
                 <div class="card-body row mt-0 mb-0 pt-1 pb-1">
                     <p class="col-6 mb-2"> Subtotal</p>
-                    <strong class="col-6 d-flex justify-content-end">USD ${precioTotalCarrito.toFixed(2)}</strong>
-                    <p class="col-6"><small class="text-muted">Envío</small></p>
+                    <strong class="col-6 d-flex justify-content-end">USD ${precioSubTotal.toFixed(2)}</strong>
+                    <p class="col-6"><small class="text-muted">(*) Envío</small></p>
                     <small class="text-muted col-6 d-flex justify-content-end"><strong> USD
-                            0.00</strong></small>
+                            ${precioEnvio.toFixed(2)}</strong></small>
                  </div>
                 <hr class="mt-1 mb-1 me-3 ms-3">
                 <div class="card-title d-flex justify-content-center">
@@ -124,6 +147,7 @@ function mostrarCarrito() {
             <p class="aclaraciones mt-4 mb-4"> Para continuar con tu pedido, deberás previamente crear una cuenta en
                 nuestro
                 sitio.</p>
+                
             <div class="card mb-0 p-0 m-0 rounded-0 border-0">
                 <div class="card-footer text-center border-0 mb-2" id="btnPagar">
                     <a class="btn rounded-0" href=""> CONTINUAR CON EL PAGO </a>
@@ -135,6 +159,7 @@ function mostrarCarrito() {
                     <a class="btn rounded-0" href="./ingreso.html"> SI YA SOS USUARIO, INGRESÁ AQUÍ </a>
                 </div>
             </div>
+            <p class="aclaraciones mt-4 mb-4"> (*) Si usted se encuentra en el interior, el envío tiene un costo de USD 5.</p>
         `      
 }
 
@@ -189,6 +214,8 @@ function eliminarProducto(codigoProd) {
     });
     
 }
+
+
 
 
 sessionStorage.getItem("carrito") ? sumarPrecioCarrito() : null;

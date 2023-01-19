@@ -12,15 +12,15 @@ function ingreso() {
 
     emailIngresado === "" ?
         
-        [ocultarTodoLogin(), mostrarError(emailVacioInicio)] :
+        [ocultarTodoLogin(), mostrarElemento(emailVacioInicio)] :
 
         /^\w+([\.-]?\w+)*@(?:|hotmail|outlook|gmail|banifox)\.(?:|com|com.uy|es)+$/i.test(emailIngresado) === false ?
             
-            [ocultarTodoLogin(), mostrarError(emailIncorrectoInicio)] :
+            [ocultarTodoLogin(), mostrarElemento(emailIncorrectoInicio)] :
 
             passwordIngresada === "" ?
                 
-                [ocultarTodoLogin(), ocultarError(emailIncorrectoInicio), mostrarError(passwordVaciaInicio)] :
+                [ocultarTodoLogin(), ocultarElemento(emailIncorrectoInicio), mostrarElemento(passwordVaciaInicio)] :
 
             [ocultarTodoLogin(), comparadorUsuarios()];
 
@@ -49,7 +49,7 @@ function ingreso() {
             }, 200);
         })
         .catch(() => {
-            mostrarError(usuarioNoExiste);
+            mostrarElemento(usuarioNoExiste);
         });
 
     }

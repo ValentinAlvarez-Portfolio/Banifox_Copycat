@@ -26,6 +26,7 @@ usuarioActivo = {
 };
     
 usuarioAModificar = JSON.parse(localStorage.getItem(usuarioActivo.emailUsuario));
+modificarUsuarioActivo = JSON.parse(sessionStorage.getItem('Usuario Activo'));
 
 for (const propiedad in usuarioAModificar) {
     if (usuarioAModificar[propiedad]) {
@@ -50,7 +51,7 @@ formularioDatosAcceso.addEventListener('submit', (e) => {
     e.preventDefault();
     document.querySelector('#passwordActualMiCuenta').value === usuarioAModificar.passwordUsuario ?
         modificarPassword() :
-        mostrarError(errorPasswordActualMiCuenta);
+        mostrarElemento(errorPasswordActualMiCuenta);
 });
 
 function validarCampo(nombreCampo, valorCampo) {
@@ -173,14 +174,14 @@ function modificarPassword() {
     const errorPasswordRepetida = errorPasswordRepetidaMiCuenta;
     const registroCompleto = document.querySelector('#registroCompleto');
 
-    ocultarError(errorPasswordActual);
+    ocultarElemento(errorPasswordActual);
 
     (passwordNueva.length <= 7) ?
-        mostrarError(errorPasswordNueva) :
+        mostrarElemento(errorPasswordNueva) :
         (passwordNueva !== passwordRepetida) ?
-            [ocultarError(errorPasswordNueva),
-            mostrarError(errorPasswordRepetida)] :
-            [ocultarError(errorPasswordRepetida), ocultarError(errorPasswordRepetida),
+            [ocultarElemento(errorPasswordNueva),
+            mostrarElemento(errorPasswordRepetida)] :
+            [ocultarElemento(errorPasswordRepetida), ocultarElemento(errorPasswordRepetida),
             usuarioAModificar.passwordUsuario = passwordNueva,
             localStorage.setItem(usuarioActivo.emailUsuario, JSON.stringify(usuarioAModificar)),
             sessionStorage.setItem('Usuario Activo', JSON.stringify([usuarioAModificar])),
@@ -190,6 +191,7 @@ function modificarPassword() {
             mostrarCompletado(registroCompleto)];
 
 }
+
 
 
 

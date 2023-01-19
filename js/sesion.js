@@ -5,7 +5,7 @@ function sesion() {
 
     sessionStorage.getItem('Usuario Activo') !== null ?
         
-        [bienvenido.classList.remove('hidden'), registroHeader.classList.add('hidden'), ingresarHeader.classList.add('hidden'), dropCuenta.classList.remove('hidden'), nombreCuenta.innerHTML = JSON.parse(sessionStorage.getItem('Usuario Activo'))[0].emailUsuario] :
+        [mostrarElemento(bienvenido), registroHeader.classList.add('hidden'), ingresarHeader.classList.add('hidden'), dropCuenta.classList.remove('hidden'), nombreCuenta.innerHTML = JSON.parse(sessionStorage.getItem('Usuario Activo'))[0].emailUsuario] :
     
         [bienvenido.classList.add('hidden'), registroHeader.classList.remove('hidden'), ingresarHeader.classList.remove('hidden'), dropCuenta.classList.add('hidden')]; 
     
@@ -25,7 +25,7 @@ function sesion() {
         const cerrarSesion = document.getElementById('cerrarSesion');
         cerrarSesion.onclick = () => {
             sessionStorage.removeItem('Usuario Activo');
-            location.href = 'index.html';
+            location.href = '../index.html';
             sesion();
         }
     }

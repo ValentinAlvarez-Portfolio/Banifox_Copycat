@@ -15,21 +15,21 @@ function registro() {
 
        /^\w+([\.-]?\w+)*@(?:|hotmail|outlook|gmail)\.(?:|com|es)+$/i.test(emailRegistro) === false ?
             
-        [ocultarTodoLogin(), mostrarError(emailIncorrectoRegistro)] :
+        [ocultarTodoLogin(), mostrarElemento(emailIncorrectoRegistro)] :
 
             passwordRegistro === "" ?
                 
-               [ocultarTodoLogin(), mostrarError(passwordVaciaRegistro)] :
+               [ocultarTodoLogin(), mostrarElemento(passwordVaciaRegistro)] :
 
                     passwordRegistro.length <= 7 ?
                 
-                   [ocultarTodoLogin(), mostrarErrror(passwordVaciaRegistro)] :
+                   [ocultarTodoLogin(), mostrarElemento(passwordVaciaRegistro)] :
 
                     (passwordRegistro === passwordRegistroConfirmar ?
 
                 controlRegistro() :
                     
-    [ocultarError(passwordVaciaRegistro), mostrarError(passwordIgualesRegistro), ocultarError(usuarioExisteRegistro)]);
+    [ocultarElemento(passwordVaciaRegistro), mostrarElemento(passwordIgualesRegistro), ocultarElemento(usuarioExisteRegistro)]);
     
 
     function controlRegistro() {
@@ -58,7 +58,7 @@ function registro() {
         })
         .catch(() => {
             ocultarTodoLogin();
-            mostrarError(usuarioExisteRegistro);
+            mostrarElemento(usuarioExisteRegistro);
         });
 }
 }

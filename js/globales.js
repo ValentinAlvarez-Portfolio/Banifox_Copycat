@@ -3,11 +3,11 @@ const mainCarrito = document.querySelector("#mainCarrito");
 const mainIngreso = document.querySelector("#mainIngreso");
 const mainRegistro = document.querySelector("#mainRegistro");
 
-function mostrarError(elemento) {
+function mostrarElemento(elemento) {
     elemento.classList.remove('hidden');
 }
 
-function ocultarError(elemento) {
+function ocultarElemento(elemento) {
     elemento.classList.add('hidden');
 }
 
