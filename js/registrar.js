@@ -5,6 +5,7 @@ formularioRegistro.addEventListener("submit", (e) => {
     registro();
 })
 
+
 function registro() {
 
     let emailRegistro = document.querySelector('#emailRegistro').value;
@@ -32,33 +33,43 @@ function registro() {
     [ocultarElemento(passwordVaciaRegistro), mostrarElemento(passwordIgualesRegistro), ocultarElemento(usuarioExisteRegistro)]);
     
 
+    
     function controlRegistro() {
     let usuarioARegistrar = {
         emailUsuario: emailRegistro.toLowerCase(),
         passwordUsuario: passwordRegistro
     };
-    let guardarUsuario = new Promise((resolve, reject) => {
-        let usuarioExiste = JSON.parse(localStorage.getItem(`${usuarioARegistrar.emailUsuario}`, usuarioARegistrar));
-        if (usuarioExiste === null) {
-            nuevoUsuario = new Usuario(usuarioARegistrar.emailUsuario, usuarioARegistrar.passwordUsuario);
-            usuarios.push(nuevoUsuario);
-            localStorage.setItem(`${usuarioARegistrar.emailUsuario}`, JSON.stringify(nuevoUsuario));
-            resolve();
-        } else {
-            reject();
-        }
-    });
-    guardarUsuario
-        .then(() => {
-            ocultarTodoLogin();
-            mostrarElemento(registroCompleto);
-            setTimeout(() => {
-                window.location.href = "ingreso.html";
-            }, 1000);
+    fetch('../usuarios.json')
+        .then(response => response.json())
+        .then(data => {
+            let usuarios = data.usuarios;
+            let existeUsuario = usuarios.find(usuario => usuario.emailUsuario === usuarioARegistrar.emailUsuario);
+            if (!existeUsuario) {
+                usuarios.push(usuarioARegistrar);
+                return fetch('../usuarios.json', {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            } else {
+                throw new Error('El usuario ya existe');
+            }
         })
-        .catch(() => {
+        .then(response => {
+            if (response.ok) {
+                ocultarTodoLogin();
+                mostrarElemento(registroCompleto);
+                setTimeout(() => {
+                    window.location.href = "ingreso.html";
+                }, 1000);
+            } else {
+                throw new Error('Error al guardar el usuario');
+            }
+        })
+        .catch(error => {
             ocultarTodoLogin();
             mostrarElemento(usuarioExisteRegistro);
+            console.error(error);
         });
 }
 }

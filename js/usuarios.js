@@ -5,6 +5,13 @@ let usuarioAdmin = {
     passwordUsuario: "admin123",
 }
 
+fetch('../usuarios.json')
+    .then(response => response.json())
+    .then(data => {
+        // data contiene el objeto JSON con el arreglo de usuarios
+    })
+    .catch(error => console.error(error));
+
 localStorage.setItem(usuarioAdmin.emailUsuario, JSON.stringify(usuarioAdmin));
 
 function Usuario(emailUsuario, passwordUsuario) {
