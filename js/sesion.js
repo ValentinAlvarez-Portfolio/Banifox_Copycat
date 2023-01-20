@@ -39,7 +39,7 @@ function sesion() {
             mainIndex !== null ?
                 location.href = '../index.html'
                 :
-                location.href = 'index.html';
+                location.href = 'PFAlvarez/index.html';
             sesion();
         }
 
