@@ -36,7 +36,6 @@ function sesion() {
         // Se crea un evento para cerrar sesión
         cerrarSesion.onclick = () => {
             sessionStorage.removeItem('Usuario Activo');
-            mainIndex !== null ? location.href = 'index.html' : location.href = 'ingreso.html';
             sesion();
         }
 
