@@ -37,7 +37,12 @@ function sesion() {
         cerrarSesion.onclick = () => {
             sessionStorage.removeItem('Usuario Activo');
             sesion();
+            setTimeout(() => {
+            location.reload();
+        }, 1000);
         }
+
+        
 
     }
 

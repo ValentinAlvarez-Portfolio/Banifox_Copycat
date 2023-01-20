@@ -98,7 +98,6 @@ function sumarPrecioCarrito() {
     
 }
 
-
 // Función para mostrar el carrito en "carrito.HTML".
 function mostrarCarrito() {
 
@@ -165,7 +164,7 @@ function mostrarCarrito() {
                 
             <div class="card mb-0 p-0 m-0 rounded-0 border-0">
                 <div class="card-footer text-center border-0 mb-2" id="btnPagar">
-                    <a class="btn rounded-0" href=""> CONTINUAR CON EL PAGO </a>
+                    <a class="btn rounded-0" href="" id="pagar"> CONTINUAR CON EL PAGO </a>
                 </div>
                 <div class="card-footer text-center border-0 mb-2 mt-0" id="btnCrearCuenta">
                     <a class="btn rounded-0" href="./registro.html"> CREÁ TU CUENTA AQUÍ </a>
@@ -252,13 +251,94 @@ function eliminarProducto(codigoProd) {
     
 }
 
-
+// Función para mostrar alerta de método de pago y confirmación de compra
+function comprar() {
+    swal.fire({
+        title: 'Ingresa los datos de tu tarjeta',
+        html: 'Número de tarjeta: <input id="swal-input1" class="swal2-input">' +
+                'Fecha de vencimiento: <input id="swal-input2" class="swal2-input">' +
+                'CVV: <input id="swal-input3" class="swal2-input">',
+        focusConfirm: false,
+        preConfirm: () => {
+            return {
+            cardNumber: document.getElementById('swal-input1').value,
+            expirationDate: document.getElementById('swal-input2').value,
+            cvv: document.getElementById('swal-input3').value
+            }
+        }
+        }).then((result) => {
+        if (result.value) {
+            swal.fire(
+            '¡Pago realizado!',
+            `Número de tarjeta: ${result.value.cardNumber}` +
+            `Fecha de vencimiento: ${result.value.expirationDate}` +
+            `CVV: ${result.value.cvv}`,
+            'success'
+            )
+        }
+        })
+}
 
 // Si el carrito no está vacío, se ejecuta la función para sumar el precio total del carrito
 sessionStorage.getItem("carrito") ? sumarPrecioCarrito() : null;
 
 // Si el usuario se encuentra en el carrito, se muestra el carrito
-mainCarrito !== null ? mostrarCarrito() : null;
+if (mainCarrito !== null) {
+
+    mostrarCarrito();
+
+    // Si el usuario se encuentra en el carrito y el carrito no está vacío, evalúa si el usuario ha ingresado su dirección
+    if (pagar !== null && JSON.parse(sessionStorage.getItem("Usuario Activo")) !== null) {
+        
+        usuarioActivo = {
+            departamento: JSON.parse(sessionStorage.getItem("Usuario Activo"))[0].departamento,
+        }
+
+        // Si el usuario no ha ingresado su dirección, se muestra un mensaje de error
+        if (usuarioActivo.departamento === "" || usuarioActivo.departamento === null || usuarioActivo.departamento === undefined || usuarioActivo.departamento === " ") {
+                
+                pagar.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    swal.fire({
+                        title: '¡Importante!',
+                        text: 'Para realizar la compra es necesario que ingreses tu dirección.',
+                        icon: 'warning',
+                        confirmButtonText: 'Ingresar dirección',
+                        showCancelButton: true,
+                        cancelButtonText: 'Cancelar compra',
+                        confirmButtonColor: '#0074bd',
+                        cancelButtonColor: '#d7292b',
+                    }).then((result) => {
+                        if (result.value) {
+                            setTimeout(() => {
+                                location.href = "./miCuenta.html";
+                            }, 1000);
+                        } else if (result.dismiss === swal.DismissReason.cancel) {
+                            swal.fire(
+                                {
+                                    title: 'Compra cancelada',
+                                    text: 'La compra ha sido cancelada.',
+                                    icon: 'error',
+                                    confirmButtonColor: '#0074bd',
+                                    cancelButtonColor: '#d7292b',
+                                })
+                        }
+                    })
+                })
+                    
+            // Si el usuario ha ingresado su dirección, se ejecuta la función para pagar
+            } else {
+                pagar.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    comprar();
+                })
+                
+            }
+    }
+    
+}
+
+
 
 
 
