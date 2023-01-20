@@ -5,9 +5,11 @@ let precioEnvio = 0;
 const precioCarritoHeader = document.querySelector("#precioCarritoHeader");
 const btnEliminarCarrito = document.querySelector("#btnEliminarCarrito");
 
+// Función para agregar productos al carrito
 function agregarAlCarrito(codigoProd) {
     let producto = productos.find(p => p.codigoProd === codigoProd);
 
+    // Alerta y promesa para confirmar si desea agregar el producto al carrito
     Swal.fire({
         customClass: {
             title: 'tituloAlerta',
@@ -24,6 +26,8 @@ function agregarAlCarrito(codigoProd) {
         confirmButtonText: 'Confirmar',
         
     }).then((result) => {
+
+        // Si confirma, se agrega el producto al carrito
         if (result.isConfirmed) {
             if(producto) {
                 if(!sessionStorage.getItem("carrito")) {
@@ -45,6 +49,8 @@ function agregarAlCarrito(codigoProd) {
             }).catch((error) => {
                 console.log(error);
             });
+
+        // Si cancela, no se agrega el producto al carrito
         } else {
             Swal.fire({
                 title: 'Cancelado',
@@ -59,9 +65,11 @@ function agregarAlCarrito(codigoProd) {
     });
 }
 
+// Función para calcular el precio total del carrito.
 function sumarPrecioCarrito() {
     let productosCarrito = JSON.parse(sessionStorage.getItem("carrito"));
     
+    // Se recorren los productos del carrito y se suman los precios.
     productosCarrito.forEach(producto => {
         precioTotalCarrito += parseInt(producto.precioProd);
         precioSubTotal = precioTotalCarrito;
@@ -69,13 +77,15 @@ function sumarPrecioCarrito() {
 
     precioCarritoHeader.innerText = `USD ${precioTotalCarrito.toFixed(2)}`;
 
-    
+    // Función para calcular el precio del envío.
     function calcularEnvio () {
         usuarioActivo = {
         emailUsuario: JSON.parse(sessionStorage.getItem('Usuario Activo'))[0].emailUsuario,
         passwordUsuario: JSON.parse(sessionStorage.getItem('Usuario Activo'))[0].passwordUsuario,
         };
         usuario = JSON.parse(localStorage.getItem(usuarioActivo.emailUsuario));
+
+        // Si el usuario no es de Montevideo, se le suma USD 5 al precio del envío.
         if (usuario.departamento !== undefined && usuario.departamento !== "Montevideo") {
             precioEnvio += 5;
             precioTotalCarrito += precioEnvio;
@@ -89,10 +99,14 @@ function sumarPrecioCarrito() {
 }
 
 
-
+// Función para mostrar el carrito en "carrito.HTML".
 function mostrarCarrito() {
 
+    // Si el carrito no se encuentra vacio, se recorren los productos del carrito y se muestran en el HTML.
     if (JSON.parse(sessionStorage.getItem("carrito")) !== null && JSON.parse(sessionStorage.getItem("carrito")).length > 0) {
+
+        ocultarElemento(carritoVacio);
+
         JSON.parse(sessionStorage.getItem("carrito", JSON.stringify(carrito))).forEach(producto => {
             productosEnCarrito.innerHTML += `
                 <div class="card mb-3 p-0 m-0 rounded-0">
@@ -162,18 +176,27 @@ function mostrarCarrito() {
             </div>
             <p class="aclaraciones mt-4 mb-4"> (*) Si usted se encuentra en el interior, el envío tiene un costo de USD 5.</p>
         `
+        
+
+    // Si el carrito está vacío, se muestra el mensaje de carrito vacío
     } else {
-        null;
+        mostrarElemento(carritoVacio);
     }
+
+    
     
 }
 
+// Función para eliminar un producto del carrito
 function eliminarProducto(codigoProd) {
 
+    // Si el carrito no está vacío, se elimina el producto seleccionado
     if (JSON.parse(sessionStorage.getItem("carrito")) !== null && JSON.parse(sessionStorage.getItem("carrito")).length > 0) {
         let carrito = JSON.parse(sessionStorage.getItem("carrito"));
         let producto = carrito.find(p => p.codigoProd === codigoProd);
         let index = carrito.indexOf(producto);
+
+        // Se muestra un mensaje de confirmación para eliminar el producto
         Swal.fire({
             customClass: {
                 title: 'tituloAlerta',
@@ -190,6 +213,8 @@ function eliminarProducto(codigoProd) {
             confirmButtonText: 'Confirmar',
         
         }).then((result) => {
+
+            // Si se confirma la eliminación, se elimina el producto del carrito
             if (result.isConfirmed) {
                 let carrito = JSON.parse(sessionStorage.getItem("carrito"));
                 carrito.splice(index, 1);
@@ -206,6 +231,7 @@ function eliminarProducto(codigoProd) {
                     console.log(error);
                 });
         
+            // Si se cancela la eliminación, se muestra un mensaje de cancelación
             } else {
                 Swal.fire({
                     title: 'Cancelado',
@@ -218,17 +244,20 @@ function eliminarProducto(codigoProd) {
         }).catch((error) => {
             console.log(error);
         });
+    
+    // Si el carrito está vacío, se muestra un mensaje de error
     } else {
-        null;
+        mostrarElemento(carritoVacio);
     }
     
 }
 
 
 
-
+// Si el carrito no está vacío, se ejecuta la función para sumar el precio total del carrito
 sessionStorage.getItem("carrito") ? sumarPrecioCarrito() : null;
 
+// Si el usuario se encuentra en el carrito, se muestra el carrito
 mainCarrito !== null ? mostrarCarrito() : null;
 
 

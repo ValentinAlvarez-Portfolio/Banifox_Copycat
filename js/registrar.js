@@ -1,11 +1,6 @@
 const formularioRegistro = document.querySelector('#formularioRegistro');
 
-formularioRegistro.addEventListener("submit", (e) => {
-    e.preventDefault();
-    registro();
-})
-
-
+// Función para registrar usuarios
 function registro() {
 
     let emailRegistro = document.querySelector('#emailRegistro').value;
@@ -14,65 +9,79 @@ function registro() {
 
     ocultarElemento(registroCompleto);
 
-       /^\w+([\.-]?\w+)*@(?:|hotmail|outlook|gmail)\.(?:|com|es)+$/i.test(emailRegistro) === false ?
+    // Se valida que el formato de email sea correcto
+    /^\w+([\.-]?\w+)*@(?:|hotmail|outlook|gmail)\.(?:|com|es)+$/i.test(emailRegistro) === false ?
             
         [ocultarTodoLogin(), mostrarElemento(emailIncorrectoRegistro)] :
 
-            passwordRegistro === "" ?
+        // Se valida que el campo de contraseña no esté vacío
+        passwordRegistro === "" ?
                 
-               [ocultarTodoLogin(), mostrarElemento(passwordVaciaRegistro)] :
+            [ocultarTodoLogin(), mostrarElemento(passwordVaciaRegistro)] :
 
-                    passwordRegistro.length <= 7 ?
+                // Se valida que la contraseña ingresada tenga al menos 8 caracteres
+                passwordRegistro.length <= 7 ?
                 
-                   [ocultarTodoLogin(), mostrarElemento(passwordVaciaRegistro)] :
+                [ocultarTodoLogin(), mostrarElemento(passwordVaciaRegistro)] :
 
-                    (passwordRegistro === passwordRegistroConfirmar ?
+                // Se valida que las contraseñas ingresadas coincidan
+                (passwordRegistro === passwordRegistroConfirmar ?
 
-                controlRegistro() :
+        controlRegistro() :
                     
     [ocultarElemento(passwordVaciaRegistro), mostrarElemento(passwordIgualesRegistro), ocultarElemento(usuarioExisteRegistro)]);
     
 
-    
+    // Función para controlar el registro de usuarios
     function controlRegistro() {
-    let usuarioARegistrar = {
-        emailUsuario: emailRegistro.toLowerCase(),
-        passwordUsuario: passwordRegistro
-    };
-    fetch('../usuarios.json')
-        .then(response => response.json())
-        .then(data => {
-            let usuarios = data.usuarios;
-            let existeUsuario = usuarios.find(usuario => usuario.emailUsuario === usuarioARegistrar.emailUsuario);
-            if (!existeUsuario) {
-                usuarios.push(usuarioARegistrar);
-                return fetch('../usuarios.json', {
-                    method: 'POST',
-                    body: JSON.stringify(data),
-                    headers: { 'Content-Type': 'application/json' }
-                });
+
+        let usuarioARegistrar = {
+            emailUsuario: emailRegistro.toLowerCase(),
+            passwordUsuario: passwordRegistro
+            };
+
+        // Se crea una promesa para validar que el usuario no exista
+        let guardarUsuario = new Promise((resolve, reject) => {
+    
+            let usuarioExiste = JSON.parse(localStorage.getItem(`${usuarioARegistrar.emailUsuario}`, usuarioARegistrar));
+        
+            // Si el usuario no existe, se crea un nuevo usuario y se guarda en el localStorage
+            if (usuarioExiste === null) {
+
+                nuevoUsuario = new Usuario(usuarioARegistrar.emailUsuario, usuarioARegistrar.passwordUsuario);
+                usuarios.push(nuevoUsuario);
+                localStorage.setItem(`${usuarioARegistrar.emailUsuario}`, JSON.stringify(nuevoUsuario));
+                resolve();
+
+            // Si el usuario existe, se rechaza la promesa    
             } else {
-                throw new Error('El usuario ya existe');
+                reject();
             }
-        })
-        .then(response => {
-            if (response.ok) {
+
+        });
+
+        // Se ejecuta la promesa
+        guardarUsuario
+            .then(() => {
                 ocultarTodoLogin();
                 mostrarElemento(registroCompleto);
                 setTimeout(() => {
                     window.location.href = "ingreso.html";
                 }, 1000);
-            } else {
-                throw new Error('Error al guardar el usuario');
-            }
-        })
-        .catch(error => {
-            ocultarTodoLogin();
-            mostrarElemento(usuarioExisteRegistro);
-            console.error(error);
-        });
+            })
+            .catch(() => {
+                ocultarTodoLogin();
+                mostrarElemento(usuarioExisteRegistro);
+            });
+} 
+
 }
-}
+
+// Evento para registrar usuarios
+formularioRegistro.addEventListener("submit", (e) => {
+    e.preventDefault();
+    registro();
+})
 
 
 

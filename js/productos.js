@@ -5,25 +5,32 @@ const btnCrearProducto = document.querySelector('#btnCrearProducto');
 const formularioEliminarProductos = document.querySelector('#formularioEliminarProductos');
 const btnEliminarProducto = document.querySelector('#btnEliminarProducto');
 
+// Función creadora de productos
 function Producto(nombreProd, precioProd, categoriaProd, marcaProd, codigoProd, id) {
+
     this.nombreProd = nombreProd;
     this.precioProd = precioProd + ".00";
     this.categoriaProd = categoriaProd;
     this.marcaProd = marcaProd;
     this.codigoProd = codigoProd;
     this.id = id;
+
 }
 
+// Función para crear productos
 function crearProducto() {
+
     let nombreProducto = document.querySelector('#nombreProducto').value;
     let precioProducto = document.querySelector('#precioProducto').value;
     let categoriaProducto = document.querySelector('#categoriaProducto').value;
     let marcaProducto = document.querySelector('#marcaProducto').value;
     let codigoProducto = document.querySelector('#codigoProducto').value;
 
+    // Validación de campos vacíos
     nombreProducto, precioProducto, categoriaProducto, marcaProducto, codigoProducto == "" ?
         [mostrarElemento(completarTodo)] :
 
+        // Si no hay campos vacíos, se crea el producto
         [ocultarElemento(completarTodo),
             id = Date.now(),
             productoACrear = {
@@ -35,12 +42,16 @@ function crearProducto() {
             setTimeout(() => {
                 location.reload();
             }, 2000)];
+    
 }
 
+// Función para eliminar productos
 function eliminarProducto() {
     codigoProductoAEliminar = document.querySelector('#codigoProductoAEliminar').value;
 
     let producto = productos.find(p => p.codigoProd === codigoProductoAEliminar);
+
+    // Si el producto existe, se elimina
     if (producto != undefined) {
         if (producto.id) {
             localStorage.removeItem(producto.id);
@@ -51,18 +62,20 @@ function eliminarProducto() {
             location.reload();
             }, 2000);
         } 
+    
+    // Si el producto no existe, se muestra un mensaje de error
     } else {
         ocultarElemento(productoEliminado);
         mostrarElemento(errorEliminarProducto);
     }
     
-
     cargarProductos();
 }
 
+// Función para cargar los productos
 function cargarProductos() {
 
-
+    // Se recorre el localStorage y se guardan los productos en un array
     for (let i = 0; i < localStorage.length; i++) {
         let clave = localStorage.key(i);
         let valor = localStorage.getItem(clave);
@@ -73,12 +86,15 @@ function cargarProductos() {
         };
     }
 
+    // Se carga el array en el sessionStorage
     sessionStorage.setItem("productos", JSON.stringify(productos));
 
 }
 
+// Función para mostrar los productos
 function mostrarProductos() {
 
+    // Si el creador de productos no se muestra, recorre el sessionStorage y se muestran los productos para el cliente
     creadorProductos.classList.contains("hidden") ?
         JSON.parse(sessionStorage.getItem("productos", JSON.stringify(productos))).forEach((producto) => {
             
@@ -95,6 +111,8 @@ function mostrarProductos() {
             </div>
         </div>`;
         }) :
+
+        // Si el creador de productos se muestra, recorre el sessionStorage y se muestran los productos para el administrador
         JSON.parse(sessionStorage.getItem("productos", JSON.stringify(productos))).forEach((producto) => {
 
             contenedorProductos.innerHTML +=
@@ -121,7 +139,7 @@ function mostrarProductos() {
 
 }
 
-
+// Eventos
 formularioAgregarProductos.addEventListener("submit", (e) => {
     e.preventDefault();
     crearProducto();
@@ -142,7 +160,7 @@ btnEliminarProducto.addEventListener("click", (e) => {
     eliminarProducto();
 })
 
-
+// Llamado a las funciones
 cargarProductos();
 mostrarProductos();
 
