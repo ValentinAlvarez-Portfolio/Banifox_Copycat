@@ -17,6 +17,19 @@ function Producto(nombreProd, precioProd, categoriaProd, marcaProd, codigoProd, 
 
 }
 
+function productosDePrueba() {
+
+    // Productos de prueba
+    const producto1 = new Producto("ZOTAC GEFORCE RTX 2060", 619, "TARJETAS DE VIDEO", "NVIDIA", "BFXZON02", id = Date.now());
+    const producto2 = new Producto("AMD PROCESADOR RYZEN 5 5600", 224, "PROCESADORES", "AMD", "BFX56", id = Date.now());
+
+    productos.push(producto1, producto2);
+
+    sessionStorage.setItem("productos", JSON.stringify(productos));
+
+}
+
+
 // Función para crear productos
 function crearProducto() {
 
@@ -27,22 +40,22 @@ function crearProducto() {
     let codigoProducto = document.querySelector('#codigoProducto').value;
 
     // Validación de campos vacíos
-    nombreProducto, precioProducto, categoriaProducto, marcaProducto, codigoProducto == "" ?
-        [mostrarElemento(completarTodo)] :
+    nombreProducto, precioProducto, categoriaProducto, marcaProducto, codigoProducto == "" ? [mostrarElemento(completarTodo)] :
 
         // Si no hay campos vacíos, se crea el producto
         [ocultarElemento(completarTodo),
             id = Date.now(),
             productoACrear = {
                 numeroProd: "Producto " + (productos.length + 1),
-                producto: new Producto(nombreProducto, precioProducto , categoriaProducto, marcaProducto, codigoProducto, id),
+                producto: new Producto(nombreProducto, precioProducto, categoriaProducto, marcaProducto, codigoProducto, id),
             },
             localStorage.setItem(id, JSON.stringify(productoACrear.producto)),
             mostrarElemento(productoCreado),
             setTimeout(() => {
                 location.reload();
-            }, 2000)];
-    
+            }, 2000)
+        ];
+
 }
 
 // Función para eliminar productos
@@ -59,16 +72,16 @@ function eliminarProducto() {
             ocultarElemento(errorEliminarProducto);
             mostrarElemento(productoEliminado);
             setTimeout(() => {
-            location.reload();
+                location.reload();
             }, 2000);
-        } 
-    
-    // Si el producto no existe, se muestra un mensaje de error
+        }
+
+        // Si el producto no existe, se muestra un mensaje de error
     } else {
         ocultarElemento(productoEliminado);
         mostrarElemento(errorEliminarProducto);
     }
-    
+
     cargarProductos();
 }
 
@@ -82,8 +95,8 @@ function cargarProductos() {
         let producto = JSON.parse(valor);
         producto.codigoProd != undefined ?
             productos.push(producto) : () => {
-            return;
-        };
+                return;
+            };
     }
 
     // Se carga el array en el sessionStorage
@@ -97,7 +110,7 @@ function mostrarProductos() {
     // Si el creador de productos no se muestra, recorre el sessionStorage y se muestran los productos para el cliente
     creadorProductos.classList.contains("hidden") ?
         JSON.parse(sessionStorage.getItem("productos", JSON.stringify(productos))).forEach((producto) => {
-            
+
             contenedorProductos.innerHTML +=
                 `<div class="col">
             <div class="card h-100 border-0">
@@ -132,10 +145,10 @@ function mostrarProductos() {
                     <p class="card-text mb-2 fw-bold codigoProd">${producto.codigoProd}</p>
                 </div>
         </div>`;
-            
+
         });
-    
-    
+
+
 
 }
 
@@ -161,10 +174,6 @@ btnEliminarProducto.addEventListener("click", (e) => {
 })
 
 // Llamado a las funciones
+productosDePrueba();
 cargarProductos();
 mostrarProductos();
-
-
-
-
-    
