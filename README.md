@@ -9,7 +9,7 @@
 - Email: admin@banifox.com.uy
 - Contraseña: admin123
 
-> Importante: Cuando se ingresa por primera vez, es necesario crear los productos desde cero.
+> Importante: Cuando se ingresa por primera vez o se elimina el sessionStorage, aunque se cuenta con los primeros 2 productos de la lista diponible de productos de prueba, sería recomendable crear el resto con el usuario admin.
 
 ## Productos a crear con imágenes disponibles:
 
