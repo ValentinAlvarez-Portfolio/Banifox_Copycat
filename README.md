@@ -2,6 +2,10 @@
 
 > Proyecto final para el curso de JavaScript de Coderhouse.
 
+## Descripción
+
+Desarrollo de un e-commerce de hardware utilizando Bootstrap 5, SASS y JavaScript, con el layout basado en un sitio ya existente. El proyecto consta de un sign-in y log-in de usuarios, una sección para modificar los datos del usuario ingresado, un creador de productos para un usuario administrador, una página de inicio donde se muestran los productos creados y un carrito de compras.
+
 ## Usuario ADMIN
 
 > Es necesario iniciar sesión como administrador para crear y eliminar productos.
